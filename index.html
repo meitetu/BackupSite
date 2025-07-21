@@ -32,6 +32,17 @@
       font-family: 'M PLUS Rounded 1c', sans-serif;
     }
 
+    #gh-notice {
+      display: none;
+      background: #ff9800;
+      color: #000;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
     main {
       flex-grow: 1;
     }
@@ -174,6 +185,11 @@
 </head>
 <body>
 
+  <!-- ✅ GitHub Pages通知バー -->
+  <div id="gh-notice" lang="ja">
+    現在、GitHub Pagesからアクセスしています
+  </div>
+
   <main>
     <header>
       <h1 lang="ja">meitetuのサイト</h1>
@@ -213,6 +229,11 @@
   <div id="message-overlay" lang="ja">別のサイトに移行します...</div>
 
   <script>
+    // ✅ GitHub Pages 判定して通知を表示
+    if (location.hostname.includes("github.io")) {
+      document.getElementById("gh-notice").style.display = "block";
+    }
+
     // 外部リンククリック時にメッセージ表示
     document.querySelectorAll('a.external-link').forEach(link => {
       link.addEventListener('click', function(e) {
@@ -232,7 +253,7 @@
       const img = new Image();
       img.src = "https://counter.256server.com/meitetuservercounter";
       img.alt = "かわいいアクセスカウンター";
-      img.referrerPolicy = "no-referrer"; // 送られないと困る場合は omit しない
+      img.referrerPolicy = "no-referrer";
       img.onload = () => {
         document.getElementById('counter-placeholder').appendChild(img);
       };
